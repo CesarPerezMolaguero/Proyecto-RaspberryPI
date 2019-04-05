@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proyecto</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<section id="fondo">
+    <div id="indicearriba">
+        <p>
+            <a href="#1">PREPARACIÓN DE RASPBERRY PI</a> |
+            <a href="#2">Instalación de Apache Server</a> |
+            <a href="#3">Instalación MYSQL</a> |
+            <a href="#4">Modelo E/R y lógico</a>  <br>
+            <a href="#5">Creación de la base de datos</a> |
+            <a href="#6">Alojar pagina web en Apache</a> |
+            <a href="#7">Estimación de costes</a>
+        </p>
+    </div>
+    <nav id="menu">
+        <div id="menutexto">
+        <h2>ÍNDICE</h2>
+        <ol>
+            <li><a href="#1">PREPARACIÓN DE RASPBERRY PI</a></li>
+            <li><a href="#2">Instalación de Apache Server</a></li>
+            <li><a href="#3">Instalación MYSQL</a></li>
+            <li><a href="#4">Modelo E/R y lógico</a></li>
+            <li><a href="#5">Creación de la base de datos</a></li>
+            <li><a href="#6">Alojar pagina web en Apache</a></li>
+            <li><a href="#7">Estimación de costes</a></li>
+        </ol>
+        <p>El proyecto consiste en mediante un <strong>Raspberry Pi 2</strong>
+            crear un <strong>servidor Apache</strong> en el que vamos a alojar nuestra página web.
+            Además, instalaremos un <strong>servidor MYSQL</strong> en el que alojaremos una
+            base de datos basada en el colegio.</p>
+        </div>
+        <a id="logoenlace" href="http://www.centrodonbosco.es/web/index.php/component/content/article/14-sample-data-articles/100-servicio-plataforma-educamos" target="_blank">
+            <span id="logo"></span></a>
+    </nav>
+    <div id="contenido">
+        <h1>PROYECTO</h1>
+        <h2>César Pérez Molaguero  |  Victor Pérez Pedrosa | Pedro Garrido Requejo</h2>
+        <div id="texto">
+            <h3>OBJETIVO</h3>
+            <p>El objetivo del proyecto consiste en mediante una <strong>Raspberry Pi 2</strong>, que debemos conectar a ella
+                por SSH (por lo que no tendremos interfaze gráfica), crear un <strong>servidor Apache</strong>
+                en el que vamos a alojar nuestra página web que será la memoria del proyecto.
+                Además, instalaremos un <strong>servidor MYSQL</strong> en el que alojaremos una
+                base de datos basada en el colegio. Esta base de datos contemplará los profesores, los alumnos, sus horarios y notas, y el lugar
+                donde se imparte cada clase.</p>
+            <h3 id="1">1.PREPARACIÓN DE RASPBERRY PI 2</h3>
+            <p>El primer paso es encontrar nuestra Raspberry en la red, para ello la Raspberry
+                y nuestro ordenador deben estar conectados en el mismo segmento de red.
+                Para facilitar este proyecto utilizaremos un router en el que la parte LAN estén el router y la Raspberry.
+                Este será el esquema de red que montaremos.</p>
+            <figure>
+                <img src="img/1/diagrama1.PNG" alt="Diagrama de red inicial">
+                <figcaption>Fig.1 Diagrama de red inicial</figcaption>
+            </figure>
+            <p>Ahora para comprobar que tenemos conexión con la Raspberry, desde el PC haremos un ping a la Raspberry.</p>
+            <figure>
+                <img src="img/1/conexionconRasp.PNG" alt="Prueba conexión con Raspberry">
+                <figcaption>Fig.2 Prueba de conexión con Raspberry</figcaption>
+            </figure>
+            <p>Para conectar con la Raspberry de manera remota utilizaremos el comando <strong>ssh pi@192.168.0.191</strong>
+                y la contraseña por defecto es <strong>raspberry</strong>.</p>
+            <p>El siguiente paso sería cambiar la configuración de red de la Raspberry para estar en el segmento de red del colegio
+            y así tener salida a Internet. Para ello utilizaremos el editor de texto <strong>nano</strong> y modificaremos el archivo
+            <strong>/etc/network/interfaces</strong>, aplicaremos una configuración de red estática.</p>
+            <figure>
+                <img src="img/1/configuracionestaticaRasp.PNG" alt="Configuración estática Raspberry">
+                <figcaption>Fig 3. Configuración de red estática Raspberry</figcaption>
+            </figure>
+            <p>Ahora para que se applique la configuración debemos reiniciar la Raspberry con el comando <strong>sudo reboot.</strong><br>
+            Después debemos conectar el PC a la red del colegio para que la Raspberry y el PC estén en el mismo segmento de red.</p>
+            <figure>
+                <img src="img/1/diagrama2.PNG" alt="Diagrama de red 2">
+                <figcaption>Fig 4. Diagrama de red 2</figcaption>
+            </figure>
+            <p>Comprobamos la conexión con el ordenador (<strong>ping 192.168.41.240/24</strong>)
+                y además probamos si la Raspberry tiene salida a Internet (<strong>ping www.as.com</strong>).</p>
+
+
+
+
+
+
+
+
+
+            <h3 id="2">2. Instalación de Apache Server</h3>
+            <h3 id="3">3. Instalación MYSQL</h3>
+            <h3 id="4">4. Modelo E/R y lógico</h3>
+            <h3 id="5">5. Creación de la base de datos</h3>
+            <h3 id="6">6. Alojar pagina web en Apache</h3>
+            <h3 id="7">7. Estimación de costes</h3>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>

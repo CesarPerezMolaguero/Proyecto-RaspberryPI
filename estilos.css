@@ -1,0 +1,182 @@
+@import url(https://fonts.googleapis.com/css?family=Lato:300,100);
+body{
+    font-family: Lato,sans-serif;
+}
+#indicearriba{
+    display: none;
+    position: fixed;
+    text-align: center;
+    z-index: 100;
+    height: 60px;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+}
+#indicearriba p a{
+    text-decoration: none;
+    color: white;
+}
+#fondo{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-image: url("img/fondo2.jpg");
+    background-size: cover;
+}
+/*menu de navegación*/
+#menu{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 300px;
+    background-color: rgba(255,255,255,.4);
+    font-family: Lato,sans-serif;
+    font-weight: 300;
+}
+nav div{
+    padding: 10px;
+}
+nav div h2{
+   text-align: center;
+    display: block;
+    border-bottom: 1px solid black;
+    margin-top: 10px;
+}
+nav div ol{
+    margin-left: 0;
+    margin-bottom: 40px;
+    padding-left: 15px;
+    font-size: 1.2em;
+}
+nav div p{
+    font-size: 1.2em;
+    text-align: left;
+}
+nav div a{
+    text-decoration: none;
+    color: black;
+}
+#logo{
+    display: block;
+    position: absolute;
+    width: 80%;
+    margin: auto;
+    height: 150px;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: url("img/logo400.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+/*contenido principal y titulos*/
+#contenido{
+    position: absolute;
+    top: 0;
+    left: 300px;
+    right: 0;
+    height: 100%;
+    text-align: center;
+    overflow: auto;
+}
+#contenido h1{
+    margin-bottom: 5px;
+    font-weight: 300;
+    color: black;
+    font-size: 3em;
+}
+#contenido h2{
+    margin-bottom: 0;
+    margin-top: 0;
+    font-weight: 300;
+    color: black;
+    font-size: 1.2em;
+}
+/*texto*/
+#texto{
+    position: absolute;
+    right: 0;
+    left: 0;
+    background-color: rgba(255,255,255,.75);
+    border-radius: 15px;
+    margin: 50px 50px;
+}
+#texto p strong{
+    text-decoration: none;
+    font-family: 'Courier New',sans-serif;
+}
+h3{
+    text-align: center;
+    font-weight: 700;
+    color: black;
+    font-size: 2em;
+}
+#texto p{
+    padding-left: 30px;
+    padding-right: 30px;
+    text-align: justify;
+    font-size: 1.1em;
+}
+img{
+    background-size: contain;
+    opacity: 1;
+}
+figcaption{
+    font-size: 0.8em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*************MEDIA QUERY**********************/
+@media all and (max-width: 1100px){
+    nav{
+        display: none;
+    }
+    #indicearriba{
+        display: block;
+    }
+    #contenido{
+        position: absolute;
+        top: 60px;
+        left: 0;
+        right: 0;
+        height: 100%;
+        text-align: center;
+        overflow: auto;
+    }
+}
+@media all and (max-height: 650px){
+
+    nav a #logo{
+        display: none;
+    }
+}
+@media all and (max-width: 750px) {
+    #indicearriba {
+        display: none;
+    }
+    #contenido{
+        position: absolute;
+        top: 0;
+
+    }
+}

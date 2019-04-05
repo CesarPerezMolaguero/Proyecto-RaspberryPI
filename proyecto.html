@@ -42,14 +42,18 @@
         <h1>PROYECTO</h1>
         <h2>César Pérez Molaguero  |  Victor Pérez Pedrosa | Pedro Garrido Requejo</h2>
         <div id="texto">
+
             <h3>OBJETIVO</h3>
+
             <p>El objetivo del proyecto consiste en mediante una <strong>Raspberry Pi 2</strong>, que debemos conectar a ella
                 por SSH (por lo que no tendremos interfaze gráfica), crear un <strong>servidor Apache</strong>
                 en el que vamos a alojar nuestra página web que será la memoria del proyecto.
                 Además, instalaremos un <strong>servidor MYSQL</strong> en el que alojaremos una
                 base de datos basada en el colegio. Esta base de datos contemplará los profesores, los alumnos, sus horarios y notas, y el lugar
                 donde se imparte cada clase.</p>
+
             <h3 id="1">1.PREPARACIÓN DE RASPBERRY PI 2</h3>
+
             <p>El primer paso es encontrar nuestra Raspberry en la red, para ello la Raspberry
                 y nuestro ordenador deben estar conectados en el mismo segmento de red.
                 Para facilitar este proyecto utilizaremos un router en el que la parte LAN estén el router y la Raspberry.
@@ -80,17 +84,52 @@
             </figure>
             <p>Comprobamos la conexión con el ordenador (<strong>ping 192.168.41.240/24</strong>)
                 y además probamos si la Raspberry tiene salida a Internet (<strong>ping www.as.com</strong>).</p>
-
-
-
-
-
-
-
+            <figure>
+                <img src="img/1/ping-as.PNG" alt="Ping www.as.com">
+                <figcaption>Fig 5. Ping www.as.com</figcaption>
+            </figure>
 
 
             <h3 id="2">2. Instalación de Apache Server</h3>
+
+            <p>El primer paso para instalar Apache será actualizar la Raspberry para tener la última versión de Apache.
+            Entraremos en root con <strong>sudo -i</strong>y utilizaremos el comando <strong>apt-get update</strong></p>
+            <p>Después para tener los paquetes actualizados utilizaremos el comando <strong>apt-get upgrade</strong></p>
+            <p>Ahora empezaremos la instalación de Apache mediante el comando <strong>apt-get install apache2</strong>
+            y despúes reiniciaremos el resvicio con <strong>service apache2 restart</strong></p>
+            <p>Para comprobar que funciona podremos en un navegador la dirección IP de la Raspberry y debería salir la
+            siguiente página:</p>
+            <figure>
+                <img src="img/1/pagina-apache.PNG" alt="Página por defecto de Apache">
+                <figcaption>Fig 6. Página por defecto de Apache </figcaption>
+            </figure>
+
+
             <h3 id="3">3. Instalación MYSQL</h3>
+
+            <p>Para la instalación de MySQL Server debemos seguir en root y ejecutar los comandos
+            <strong>apt-get install mysql-server</strong>, después para que lea el lenguaje Php debemos
+            ejecutar <strong>apt-get install php7.0</strong>. <br>
+            Y para que se pueda comunicar con MYSQL ejecutamos <strong>apt-get install php7.0-mysql</strong>.
+            Después restauramos el servicio de
+            Apache para que se apliquen los cambios.</p>
+            <p>El siguiente paso será comprobar que todo funciona correctamente, para ello
+            crearemos una pequeña página en el directorio <strong>/var/www/html/</strong>
+                que muestre la configuración de PHP.
+                Utilizaremos el comando <strong>nano /var/www/html/inex2.php</strong> y entraremos
+                en el editor de texto Nano donde crearemos la página. Este será el código que pondremos.
+            </p>
+            <figure>
+                <img src="img/1/conf-php.PNG" alt="Página configuración PHP">
+                <figcaption>Fig 6. Página para probar que PHP funciona. </figcaption>
+            </figure>
+            <p>Ahora abrimos el navegador y ponemos <strong>192.168.41.202/index2.php</strong></p>
+            <figure>
+                <img src="img/1/pag-conf-php.PNG" alt="Página que muestra la configuración PHP">
+                <figcaption>Fig 7. Página que muestra la configuración PHP. </figcaption>
+            </figure>
+
+
             <h3 id="4">4. Modelo E/R y lógico</h3>
             <h3 id="5">5. Creación de la base de datos</h3>
             <h3 id="6">6. Alojar pagina web en Apache</h3>

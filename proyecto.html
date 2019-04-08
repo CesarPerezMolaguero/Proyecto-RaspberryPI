@@ -11,10 +11,11 @@
         <p>
             <a href="#1">PREPARACIÓN DE RASPBERRY PI</a> |
             <a href="#2">Instalación de Apache Server</a> |
-            <a href="#3">Instalación MYSQL</a> <br>
+            <a href="#3">Instalación MySQL</a> <br>
             <a href="#4">Base de datos</a>  |
-            <a href="#6">Alojar pagina web en Apache</a> |
-            <a href="#7">Estimación de costes</a>
+            <a href="#5">Alojar pagina web en Apache</a> |
+            <a href="#6">Estimación de costes</a> |
+            <a href="#7">FUENTES</a>
         </p>
     </div>
     <nav id="menu">
@@ -23,14 +24,15 @@
             <ol>
                 <li><a href="#1">PREPARACIÓN DE RASPBERRY PI</a></li>
                 <li><a href="#2">Instalación de Apache Server</a></li>
-                <li><a href="#3">Instalación MYSQL</a></li>
+                <li><a href="#3">Instalación MySQL</a></li>
                 <li><a href="#4">Base de datos</a></li>
-                <li><a href="#6">Alojar pagina web en Apache</a></li>
-                <li><a href="#7">Estimación de costes</a></li>
+                <li><a href="#5">Alojar pagina web en Apache</a></li>
+                <li><a href="#6">Estimación de costes</a></li>
+                <li><a href="#7">Fuentes del proyecto</a></li>
             </ol>
             <p>El proyecto consiste en mediante un <strong>Raspberry Pi 2</strong>
                 crear un <strong>servidor Apache</strong> en el que vamos a alojar nuestra página web.
-                Además, instalaremos un <strong>servidor MYSQL</strong> en el que alojaremos una
+                Además, instalaremos un <strong>servidor MySQL</strong> en el que alojaremos una
                 base de datos basada en el colegio.</p>
         </div>
         <a id="logoenlace" href="http://www.centrodonbosco.es/web/index.php/component/content/article/14-sample-data-articles/100-servicio-plataforma-educamos" target="_blank">
@@ -46,7 +48,7 @@
             <p>El objetivo del proyecto consiste en mediante una <strong>Raspberry Pi 2</strong>, que debemos conectar a ella
                 por SSH (por lo que no tendremos interfaze gráfica), crear un <strong>servidor Apache</strong>
                 en el que vamos a alojar nuestra página web que será la memoria del proyecto.
-                Además, instalaremos un <strong>servidor MYSQL</strong> en el que alojaremos una
+                Además, instalaremos un <strong>servidor MySQL</strong> en el que alojaremos una
                 base de datos basada en el colegio. Esta base de datos contemplará los profesores, los alumnos, sus horarios y notas, y el lugar
                 donde se imparte cada clase.</p>
 
@@ -58,12 +60,16 @@
                 Este será el esquema de red que montaremos.</p>
             <figure>
                 <img src="img/1/diagrama1.PNG" alt="Diagrama de red inicial">
-                <figcaption>Fig.1 Diagrama de red inicial</figcaption>
+                <figcaption>Fig 1. Diagrama de red inicial</figcaption>
+            </figure>
+            <figure>
+                <img src="img/1/parte-LAN.PNG" alt="Parte LAN">
+                <figcaption>Fig 2. Parte LAN</figcaption>
             </figure>
             <p>Ahora para comprobar que tenemos conexión con la Raspberry, desde el PC haremos un ping a la Raspberry.</p>
             <figure>
                 <img src="img/1/conexionconRasp.PNG" alt="Prueba conexión con Raspberry">
-                <figcaption>Fig.2 Prueba de conexión con Raspberry</figcaption>
+                <figcaption>Fig 3. Prueba de conexión con Raspberry</figcaption>
             </figure>
             <p>Para conectar con la Raspberry de manera remota utilizaremos el comando <strong>ssh pi@192.168.0.191</strong>
                 y la contraseña por defecto es <strong>raspberry</strong>.</p>
@@ -72,19 +78,19 @@
                 <strong>/etc/network/interfaces</strong>, aplicaremos una configuración de red estática.</p>
             <figure>
                 <img src="img/1/configuracionestaticaRasp.PNG" alt="Configuración estática Raspberry">
-                <figcaption>Fig 3. Configuración de red estática Raspberry</figcaption>
+                <figcaption>Fig 4. Configuración de red estática Raspberry</figcaption>
             </figure>
             <p>Ahora para que se applique la configuración debemos reiniciar la Raspberry con el comando <strong>sudo reboot.</strong><br>
                 Después debemos conectar el PC a la red del colegio para que la Raspberry y el PC estén en el mismo segmento de red.</p>
             <figure>
                 <img src="img/1/diagrama2.PNG" alt="Diagrama de red 2">
-                <figcaption>Fig 4. Diagrama de red 2</figcaption>
+                <figcaption>Fig 5. Diagrama de red 2</figcaption>
             </figure>
             <p>Comprobamos la conexión con el ordenador (<strong>ping 192.168.41.240/24</strong>)
                 y además probamos si la Raspberry tiene salida a Internet (<strong>ping www.as.com</strong>).</p>
             <figure>
                 <img src="img/1/ping-as.PNG" alt="Ping www.as.com">
-                <figcaption>Fig 5. Ping www.as.com</figcaption>
+                <figcaption>Fig 6. Ping www.as.com</figcaption>
             </figure>
 
 
@@ -99,16 +105,16 @@
                 siguiente página:</p>
             <figure>
                 <img src="img/1/pagina-apache.PNG" alt="Página por defecto de Apache">
-                <figcaption>Fig 6. Página por defecto de Apache </figcaption>
+                <figcaption>Fig 7. Página por defecto de Apache </figcaption>
             </figure>
 
 
-            <h3 id="3">3. Instalación MYSQL</h3>
+            <h3 id="3">3. Instalación MySQL</h3>
 
             <p>Para la instalación de MySQL Server debemos seguir en root y ejecutar los comandos
                 <strong>apt-get install mysql-server</strong>, después para que lea el lenguaje Php debemos
                 ejecutar <strong>apt-get install php7.0</strong>. <br>
-                Y para que se pueda comunicar con MYSQL ejecutamos <strong>apt-get install php7.0-mysql</strong>.
+                Y para que se pueda comunicar con MySQL ejecutamos <strong>apt-get install php7.0-mysql</strong>.
                 Después restauramos el servicio de
                 Apache para que se apliquen los cambios.</p>
             <p>El siguiente paso será comprobar que todo funciona correctamente, para ello
@@ -119,15 +125,15 @@
             </p>
             <figure>
                 <img src="img/1/conf-php.PNG" alt="Página configuración PHP">
-                <figcaption>Fig 6. Página para probar que PHP funciona. </figcaption>
+                <figcaption>Fig 8. Página para probar que PHP funciona. </figcaption>
             </figure>
             <p>Ahora abrimos el navegador y ponemos <strong>192.168.41.202/index2.php</strong></p>
             <figure>
                 <img src="img/1/pag-conf-php.PNG" alt="Página que muestra la configuración PHP">
-                <figcaption>Fig 7. Página que muestra la configuración PHP. </figcaption>
+                <figcaption>Fig 9. Página que muestra la configuración PHP. </figcaption>
             </figure>
 
-            <h4>Seguridad de MYSQL</h4>
+            <h4>Seguridad de MySQL</h4>
             <p>Para una mayor seguridad solo permitiremos las conexiones por <strong>localhost</strong>, que están controladas por el
                 <strong>puerto 3306</strong>. Este deberá aparecer cerrado para conexciones de fuera, y abierto para localhost.</p>
             <p>Utizaremos el <strong>mysql_secure_installation</strong>, habrá una paso en el que te pregunta "¿Quieres permitir conexiones remotas?"
@@ -138,20 +144,20 @@
                 Comando: <strong>nmap 192.168.41.202 -p 3306</strong></p>
             <figure>
                 <img src="img/1/nmap-fuera.PNG" alt="Escaneo del puerto 3306 en remoto">
-                <figcaption>Fig 8. Escaneo del puerto 3306 en remoto. </figcaption>
+                <figcaption>Fig 10. Escaneo del puerto 3306 en remoto. </figcaption>
             </figure>
             <p>-Entramos a la Raspberry para estar en localhost, y hacemos un nmap de las conexiones localhost.
                 Como vemos en la imagen el puerto 3306 está abierto. <br>
                 Comando: <strong>nmap localhost</strong></p>
             <figure>
                 <img src="img/1/nmap-localhost.PNG" alt="Escaneo nmap localhost">
-                <figcaption>Fig 9. Escaneo nmap localhost. </figcaption>
+                <figcaption>Fig 11. Escaneo nmap localhost. </figcaption>
             </figure>
             <p>-Entrar a MySQL desde localhost. Debemos poder entrar. <br>
                 Comando: <strong>mysql -h localhost -u root -p</strong></p>
             <figure>
                 <img src="img/1/mysql-localhost.PNG" alt="Entrar a MySQL desde localhost">
-                <figcaption>Fig 10. Entrar a MySQL desde localhost. </figcaption>
+                <figcaption>Fig 12. Entrar a MySQL desde localhost. </figcaption>
             </figure>
 
             <h4>PHPMyAdmin</h4>
@@ -169,7 +175,7 @@
             </p>
             <figure>
                 <img src="img/1/phpmyadmin.PNG" alt="Interfaz de PHPMyAdmin">
-                <figcaption>Fig 11. Interfaz de PHPMyAdmin. </figcaption>
+                <figcaption>Fig 13. Interfaz de PHPMyAdmin. </figcaption>
             </figure>
 
             <h3 id="4">4. Base de datos</h3>
@@ -183,7 +189,7 @@
                 Y refrescamos los privilegios. (<strong>flush privileges;</strong>)</p>
             <figure>
                 <img src="img/1/usuario-colegio-mysql.PNG" alt="Creación de usuario para la base de datos colegio">
-                <figcaption>Fig 12. Creación de usuario para la base de datos colegio. </figcaption>
+                <figcaption>Fig 14. Creación de usuario para la base de datos colegio. </figcaption>
             </figure>
 
 
@@ -198,18 +204,18 @@
                 -Nombre y Apellidos de los Alumnos de 1º y de 2º. <br>
             <figure>
                 <img src="img/1/modelo%20er.PNG" alt="Modelo Entidad/Relación" >
-                <figcaption>Fig 13. Modelo Entidad/Relación. </figcaption>
+                <figcaption>Fig 15. Modelo Entidad/Relación. </figcaption>
             </figure>
             <h4>Modelo relacional</h4>
             <figure>
                 <img src="img/1/RELACIONAL.PNG" alt="Modelo relacional" >
-                <figcaption>Fig 14. Modelo Relacional. </figcaption>
+                <figcaption>Fig 16. Modelo Relacional. </figcaption>
             </figure>
             <h4>Implementación de las tablas</h4>
             <p>Ahora debemos implementar el modelo relacional en MySQL, para facilitar este paso utilizaremos la herramienta PHPMyAdmin.</p>
 
 
-            <h3 id="6">5. Alojar pagina web en Apache</h3>
+            <h3 id="5">5. Alojar pagina web en Apache</h3>
 
 
             <p>Primero debemos tener subida la página Web a nuestro repositorio de <a href="https://github.com/CesarPerezMolaguero/Proyecto-RaspberryPI">GitHub</a>.
@@ -223,10 +229,10 @@
                 <strong>192.168.41.202/Proyecto-RaspberryPI.git/proyecto.html</strong></p>
             <figure>
                 <img src="img/1/resultado-pag.PNG" alt="Resultado página" >
-                <figcaption>Fig 15. Resultado de la página. </figcaption>
+                <figcaption>Fig 17. Resultado de la página. </figcaption>
             </figure>
 
-            <h3 id="7">6. Estimación de costes</h3>
+            <h3 id="6">6. Estimación de costes</h3>
 
 
             <p>Nuestro grupo a elegido la empresa <a href="https://iniciatec.es/">INICIATEC</a> para  pedirle los presupuestos de los dominios y del hosting y valorando los tres
@@ -234,7 +240,7 @@
                 aceptable y sus demás características se ajustan a  nuestra idea de presupuesto.</p>
             <figure>
                 <img src="img/1/presupuesto.PNG" alt="Presupuesto" style="width: 75%;">
-                <figcaption>Fig 16. Presupuesto. </figcaption>
+                <figcaption>Fig 18. Presupuesto. </figcaption>
             </figure>
             <h4>PLAN BÁSICO</h4>
             <p>VENTAJAS</p>
@@ -291,6 +297,35 @@
             <p>DESVENTAJAS</p>
             <p>-No es un servicio barato, las licencias y el software corren a cargo del cliente, la configuración y la administración del servidor son
                 responsabilidad del cliente y si hay averías es necesario desplazarse al data center.</p>
+
+
+            <h3 id="7">FUENTES</h3>
+
+            <p>
+            <a href="https://www.raspberrypi.org/forums/viewtopic.php?t=101424" target="_blank">Conectarse a la Raspberry por SSH.</a>
+            <br>
+            <a href="https://www.lnxd.es/entradas/como-instalar-facilmente-apache-mariadb-y-php7-en-debian-9-stretch-lamp/" target="_blank">
+                    Instalar Apache, PHP, y seguridad MySQL.</a>
+            <br>
+            <a href="https://www.comoinstalarlinux.com/como-instalar-mysql-en-debian/" target="_blank">Instalar MySQL.</a>
+            <br>
+            <a href="https://www.linuxito.com/gnu-linux/nivel-medio/883-como-instalar-phpmyadmin-en-debian" target="_blank">Instalar PHPMyAdmin</a>
+            <br>
+            <a href="https://www.digitalocean.com/community/tutorials/crear-un-nuevo-usuario-y-otorgarle-permisos-en-mysql-es" target="_blank">
+                    Crear usuarios MySQL.
+                </a>
+            <br>
+                <a href="https://www.lucidchart.com/es/users/login" target="_blank">
+                    Craer modelo relacional</a>
+            <br>
+                <a href="https://jorgesanchez.net/ermaker/" target="_blank">Crear modelo E/R</a>
+            <br>
+                <a href="https://github.com/CesarPerezMolaguero/Proyecto-RaspberryPI" target="_blank">Repositorio de GitHub</a>
+            <br>
+                <a href="https://iniciatec.es/" target="_blank">Presupuesto</a>
+            <br>
+            </p>
+            </div>
         </div>
     </div>
     <button id="ocultarindice">-</button>

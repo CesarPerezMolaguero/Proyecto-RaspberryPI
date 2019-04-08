@@ -2,25 +2,7 @@
 body{
     font-family: Lato,sans-serif;
 }
-#indicearriba{
-    display: none;
-    position: fixed;
-    text-align: center;
-    z-index: 100;
-    height: 60px;
-    top: 0;
-    left: 0;
-    right: 0;
-    background-color: black;
-    color: white;
-}
-#indicearriba p{
-    margin: 10px;
-}
-#indicearriba p a{
-    text-decoration: none;
-    color: white;
-}
+
 #fondo{
     position: fixed;
     top: 0;
@@ -30,7 +12,7 @@ body{
     background-image: url("img/fondo2.jpg");
     background-size: cover;
 }
-/*menu de navegación*/
+/***********************menu de navegación*******************/
 #menu{
     position: fixed;
     top: 0;
@@ -40,6 +22,7 @@ body{
     background-color: rgba(255,255,255,.4);
     font-family: Lato,sans-serif;
     font-weight: 300;
+    color: black;
 }
 nav div{
     padding: 10px;
@@ -52,7 +35,7 @@ nav div h2{
 }
 nav div ol{
     margin-left: 0;
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     padding-left: 15px;
     font-size: 1.3em;
 }
@@ -77,7 +60,27 @@ nav div a{
     background-size: contain;
     background-repeat: no-repeat;
 }
-
+/*******************menu de navegación cuando la pantalla es pequeña*********************/
+#indicearriba{
+    display: none;
+    position: fixed;
+    text-align: center;
+    z-index: 100;
+    height: 60px;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0,0,0,.75);
+    color: white;
+}
+#indicearriba p{
+    margin: 10px;
+}
+#indicearriba p a{
+    text-decoration: none;
+    color: white;
+}
+/**********************************titulos********************************/
 #contenido h1{
     text-align: center;
     margin-bottom: 5px;
@@ -93,19 +96,6 @@ nav div a{
     color: black;
     font-size: 1.2em;
 }
-/*texto*/
-#texto{
-    position: absolute;
-    right: 0;
-    left: 0;
-    background-color: rgba(255,255,255,.75);
-    border-radius: 15px;
-    margin: 50px 50px;
-}
-#texto p strong{
-    text-decoration: none;
-    font-family: 'Courier New',sans-serif;
-}
 h3{
     text-align: center;
     font-weight: 700;
@@ -119,9 +109,25 @@ h4{
     font-size: 1.5em;
     text-decoration: underline;
 }
-#texto p{
+/*capa de texto*/
+#texto{
+    position: absolute;
+    right: 0;
+    left: 0;
+    background-color: rgba(255,255,255,.75);
+    border-radius: 15px;
+    margin: 50px 50px;
+    padding-bottom: 20px;
     padding-left: 50px;
     padding-right: 50px;
+}
+
+#texto p strong{
+    text-decoration: none;
+    font-family: 'Courier New',sans-serif;
+}
+
+#texto p{
     text-align: justify;
     font-size: 1.1em;
 }
@@ -138,15 +144,18 @@ figure{
 img{
     max-width: 100%;
 }
+
 /***********************boton+-*****************************/
 #ocultarindice{
-    outline: none;
-    border: none;
     position: fixed;
-    width: 20px;
-    height: 20px;
     left: 0;
     top: 0;
+    width: 25px;
+    height: 25px;
+    outline: none;
+    border: none;
+    font-size: 1.5em;
+    padding: 0;
     background-color: white;
 }
 /**************************java****************************/
@@ -191,6 +200,10 @@ img{
         text-align: center;
         overflow: auto;
     }
+    #ocultarindice{
+        display: none;
+    }
+
 }
 
 @media all and (max-width: 650px) {
@@ -201,15 +214,13 @@ img{
         position: absolute;
         top: 0;
     }
-    #texto p{
+    #texto {
         padding-left: 15px;
         padding-right: 15px;
     }
-    #ocultarindice{
-        display: none;
-    }
+
 }
-@media all and (max-height: 600px){
+@media all and (max-height: 605px){
 
     nav a #logo{
         display: none;

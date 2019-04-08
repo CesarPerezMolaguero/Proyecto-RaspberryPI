@@ -20,20 +20,20 @@
     </div>
     <nav id="menu">
         <div id="menutexto">
-        <h2>ÍNDICE</h2>
-        <ol>
-            <li><a href="#1">PREPARACIÓN DE RASPBERRY PI</a></li>
-            <li><a href="#2">Instalación de Apache Server</a></li>
-            <li><a href="#3">Instalación MYSQL</a></li>
-            <li><a href="#4">Modelo E/R y lógico</a></li>
-            <li><a href="#5">Creación de la base de datos</a></li>
-            <li><a href="#6">Alojar pagina web en Apache</a></li>
-            <li><a href="#7">Estimación de costes</a></li>
-        </ol>
-        <p>El proyecto consiste en mediante un <strong>Raspberry Pi 2</strong>
-            crear un <strong>servidor Apache</strong> en el que vamos a alojar nuestra página web.
-            Además, instalaremos un <strong>servidor MYSQL</strong> en el que alojaremos una
-            base de datos basada en el colegio.</p>
+            <h2>ÍNDICE</h2>
+            <ol>
+                <li><a href="#1">PREPARACIÓN DE RASPBERRY PI</a></li>
+                <li><a href="#2">Instalación de Apache Server</a></li>
+                <li><a href="#3">Instalación MYSQL</a></li>
+                <li><a href="#4">Modelo E/R y lógico</a></li>
+                <li><a href="#5">Creación de la base de datos</a></li>
+                <li><a href="#6">Alojar pagina web en Apache</a></li>
+                <li><a href="#7">Estimación de costes</a></li>
+            </ol>
+            <p>El proyecto consiste en mediante un <strong>Raspberry Pi 2</strong>
+                crear un <strong>servidor Apache</strong> en el que vamos a alojar nuestra página web.
+                Además, instalaremos un <strong>servidor MYSQL</strong> en el que alojaremos una
+                base de datos basada en el colegio.</p>
         </div>
         <a id="logoenlace" href="http://www.centrodonbosco.es/web/index.php/component/content/article/14-sample-data-articles/100-servicio-plataforma-educamos" target="_blank">
             <span id="logo"></span></a>
@@ -70,14 +70,14 @@
             <p>Para conectar con la Raspberry de manera remota utilizaremos el comando <strong>ssh pi@192.168.0.191</strong>
                 y la contraseña por defecto es <strong>raspberry</strong>.</p>
             <p>El siguiente paso sería cambiar la configuración de red de la Raspberry para estar en el segmento de red del colegio
-            y así tener salida a Internet. Para ello utilizaremos el editor de texto <strong>nano</strong> y modificaremos el archivo
-            <strong>/etc/network/interfaces</strong>, aplicaremos una configuración de red estática.</p>
+                y así tener salida a Internet. Para ello utilizaremos el editor de texto <strong>nano</strong> y modificaremos el archivo
+                <strong>/etc/network/interfaces</strong>, aplicaremos una configuración de red estática.</p>
             <figure>
                 <img src="img/1/configuracionestaticaRasp.PNG" alt="Configuración estática Raspberry">
                 <figcaption>Fig 3. Configuración de red estática Raspberry</figcaption>
             </figure>
             <p>Ahora para que se applique la configuración debemos reiniciar la Raspberry con el comando <strong>sudo reboot.</strong><br>
-            Después debemos conectar el PC a la red del colegio para que la Raspberry y el PC estén en el mismo segmento de red.</p>
+                Después debemos conectar el PC a la red del colegio para que la Raspberry y el PC estén en el mismo segmento de red.</p>
             <figure>
                 <img src="img/1/diagrama2.PNG" alt="Diagrama de red 2">
                 <figcaption>Fig 4. Diagrama de red 2</figcaption>
@@ -93,12 +93,12 @@
             <h3 id="2">2. Instalación de Apache Server</h3>
 
             <p>El primer paso para instalar Apache será actualizar la Raspberry para tener la última versión de Apache.
-            Entraremos en root con <strong>sudo -i</strong>y utilizaremos el comando <strong>apt-get update</strong></p>
+                Entraremos en root con <strong>sudo -i</strong>y utilizaremos el comando <strong>apt-get update</strong></p>
             <p>Después para tener los paquetes actualizados utilizaremos el comando <strong>apt-get upgrade</strong></p>
             <p>Ahora empezaremos la instalación de Apache mediante el comando <strong>apt-get install apache2</strong>
-            y despúes reiniciaremos el resvicio con <strong>service apache2 restart</strong></p>
+                y despúes reiniciaremos el resvicio con <strong>service apache2 restart</strong></p>
             <p>Para comprobar que funciona podremos en un navegador la dirección IP de la Raspberry y debería salir la
-            siguiente página:</p>
+                siguiente página:</p>
             <figure>
                 <img src="img/1/pagina-apache.PNG" alt="Página por defecto de Apache">
                 <figcaption>Fig 6. Página por defecto de Apache </figcaption>
@@ -108,13 +108,13 @@
             <h3 id="3">3. Instalación MYSQL</h3>
 
             <p>Para la instalación de MySQL Server debemos seguir en root y ejecutar los comandos
-            <strong>apt-get install mysql-server</strong>, después para que lea el lenguaje Php debemos
-            ejecutar <strong>apt-get install php7.0</strong>. <br>
-            Y para que se pueda comunicar con MYSQL ejecutamos <strong>apt-get install php7.0-mysql</strong>.
-            Después restauramos el servicio de
-            Apache para que se apliquen los cambios.</p>
+                <strong>apt-get install mysql-server</strong>, después para que lea el lenguaje Php debemos
+                ejecutar <strong>apt-get install php7.0</strong>. <br>
+                Y para que se pueda comunicar con MYSQL ejecutamos <strong>apt-get install php7.0-mysql</strong>.
+                Después restauramos el servicio de
+                Apache para que se apliquen los cambios.</p>
             <p>El siguiente paso será comprobar que todo funciona correctamente, para ello
-            crearemos una pequeña página en el directorio <strong>/var/www/html/</strong>
+                crearemos una pequeña página en el directorio <strong>/var/www/html/</strong>
                 que muestre la configuración de PHP.
                 Utilizaremos el comando <strong>nano /var/www/html/inex2.php</strong> y entraremos
                 en el editor de texto Nano donde crearemos la página. Este será el código que pondremos.
@@ -129,6 +129,25 @@
                 <figcaption>Fig 7. Página que muestra la configuración PHP. </figcaption>
             </figure>
 
+            <h4>Seguridad de MYSQL</h4>
+            <p>Para una mayor seguridad solo permitiremos las conexiones por <strong>localhost</strong>, que están controladas por el
+                <strong>puerto 3306</strong>. Este deberá aparecer cerrado para conexciones de fuera, y abierto para localhost.</p>
+            <p>Utizaremos el <strong>mysql_secure_installation</strong>, habrá una paso en el que te pregunta "¿Quieres permitir conexiones remotas?"
+                debemos darele a no. Además de hacer lo mencionado anteriormente aquí podremos cambiar la contraseña del root, borrar usuarios
+                y bases de datos por defecto...</p>
+            <p>Una vez instalado las pruebas que debemos realizar son:</p>
+            <p>-Escaneo de puertos mediante nmap con una conexión remota. Como vemos en la imagen el puerto 3306 está cerrado.
+                Comando: <strong>nmap 192.168.41.202 -p 3306</strong></p>
+            <figure>
+                <img src="img/1/nmap-fuera.PNG" alt="Escaneo del puerto 3306 en remoto">
+                <figcaption>Fig 8. Escaneo del puerto 3306 en remoto. </figcaption>
+            </figure>
+            <p>-Entramos a la Raspberry para estar en localhost, y hacemos un nmap de las conexiones localhost. Como vemos en la imagen el puerto 3306 está abierto.
+                Comando: <strong>nmap localhost</strong></p>
+            <figure>
+                <img src="img/1/nmap-localhost.PNG" alt="Escaneo nmap localhost">
+                <figcaption>Fig 9. Escaneo nmap localhost. </figcaption>
+            </figure>
 
             <h3 id="4">4. Modelo E/R y lógico</h3>
             <h3 id="5">5. Creación de la base de datos</h3>

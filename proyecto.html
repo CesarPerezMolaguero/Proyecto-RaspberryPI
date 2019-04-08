@@ -11,9 +11,8 @@
         <p>
             <a href="#1">PREPARACIÓN DE RASPBERRY PI</a> |
             <a href="#2">Instalación de Apache Server</a> |
-            <a href="#3">Instalación MYSQL</a> |
-            <a href="#4">Modelo E/R y lógico</a>  <br>
-            <a href="#5">Creación de la base de datos</a> |
+            <a href="#3">Instalación MYSQL</a> <br>
+            <a href="#4">Base de datos</a>  |
             <a href="#6">Alojar pagina web en Apache</a> |
             <a href="#7">Estimación de costes</a>
         </p>
@@ -25,8 +24,7 @@
                 <li><a href="#1">PREPARACIÓN DE RASPBERRY PI</a></li>
                 <li><a href="#2">Instalación de Apache Server</a></li>
                 <li><a href="#3">Instalación MYSQL</a></li>
-                <li><a href="#4">Modelo E/R y lógico</a></li>
-                <li><a href="#5">Creación de la base de datos</a></li>
+                <li><a href="#4">Base de datos</a></li>
                 <li><a href="#6">Alojar pagina web en Apache</a></li>
                 <li><a href="#7">Estimación de costes</a></li>
             </ol>
@@ -136,23 +134,83 @@
                 debemos darele a no. Además de hacer lo mencionado anteriormente aquí podremos cambiar la contraseña del root, borrar usuarios
                 y bases de datos por defecto...</p>
             <p>Una vez instalado las pruebas que debemos realizar son:</p>
-            <p>-Escaneo de puertos mediante nmap con una conexión remota. Como vemos en la imagen el puerto 3306 está cerrado.
+            <p>-Escaneo de puertos mediante nmap con una conexión remota. Como vemos en la imagen el puerto 3306 está cerrado.<br>
                 Comando: <strong>nmap 192.168.41.202 -p 3306</strong></p>
             <figure>
                 <img src="img/1/nmap-fuera.PNG" alt="Escaneo del puerto 3306 en remoto">
                 <figcaption>Fig 8. Escaneo del puerto 3306 en remoto. </figcaption>
             </figure>
-            <p>-Entramos a la Raspberry para estar en localhost, y hacemos un nmap de las conexiones localhost. Como vemos en la imagen el puerto 3306 está abierto.
+            <p>-Entramos a la Raspberry para estar en localhost, y hacemos un nmap de las conexiones localhost.
+                Como vemos en la imagen el puerto 3306 está abierto. <br>
                 Comando: <strong>nmap localhost</strong></p>
             <figure>
                 <img src="img/1/nmap-localhost.PNG" alt="Escaneo nmap localhost">
                 <figcaption>Fig 9. Escaneo nmap localhost. </figcaption>
             </figure>
+            <p>-Entrar a MySQL desde localhost. Debemos poder entrar. <br>
+                Comando: <strong>mysql -h localhost -u root -p</strong></p>
+            <figure>
+                <img src="img/1/mysql-localhost.PNG" alt="Entrar a MySQL desde localhost">
+                <figcaption>Fig 10. Entrar a MySQL desde localhost. </figcaption>
+            </figure>
 
-            <h3 id="4">4. Modelo E/R y lógico</h3>
-            <h3 id="5">5. Creación de la base de datos</h3>
+            <h4>PHPMyAdmin</h4>
+            <p>Para poder manejar MySQL desde una interfaz gráfica debemos instalar PHPMyAdmin</p>
+            <p>Los pasos para ello son los siguientes: <br>
+            -Instalamos el paquete desde root. <strong>apt-get install phpmyadmin</strong> <br>
+            -Ahora debemos añadir "Include /etc/phpmyadmin/apache.conf" al final del archivo <strong>/etc/apache2/apache2.conf</strong><br>
+            -Reiniciamos Apache. <strong>service apache2 restart</strong> <br>
+            -Entramos a mysql como root. <strong>mysql -u root -p</strong> <br>
+            -Usar mysql. <strong>use mysql;</strong> <br>
+            -<strong>update user ser plugin '' where User='root';</strong> <br>
+            -<strong>flush privileges;</strong> <br>
+            Ahora ya tendríamos todo instalado, para entrar debemos ir al navegardor y escribir <strong>192.1168.41.202/phpmyadmin</strong>
+                Nos saldrá la siguiente página a la que accederemos con el usuario root y la contraseña que le hallamos puesto en mysql_secure_installation.<br>
+            </p>
+            <figure>
+                <img src="img/1/phpmyadmin.PNG" alt="Interfaz de PHPMyAdmin">
+                <figcaption>Fig 11. Interfaz de PHPMyAdmin. </figcaption>
+            </figure>
+
+            <h3 id="4">4. Base de datos</h3>
+            <h4>CREACIÓN DE UN USUARIOS</h4>
+            <p>Primero vamos a crear un usuario que solo tenga acceso a la base de datos que vamos a crear que se llamará "colegio".
+                Para ello entraremos a mysql desde localhost con el usuario root (<strong>mysql -h localhost -u root -p</strong>).<br>
+                Después cearemos un usuario llamado "user" con contraseña "kebab123"
+                (<strong>CREATE USER 'user'@'localhost' IDENTIFIED BY 'kebab123';</strong>)<br>
+                Ahora le daremos privilegios solo para la base de datos del colegio.
+                (<strong>GRANT ALL PRIVILEGES ON colegio. * TO 'user'@'localhost';</strong>)<br>
+                Y refrescamos los privilegios. (<strong>flush privileges;</strong>)</p>
+            <figure>
+                <img src="img/1/usuario-colegio-mysql.PNG" alt="Creación de usuario para la base de datos colegio">
+                <figcaption>Fig 12. Creación de usuario para la base de datos colegio. </figcaption>
+            </figure>
+
+
+            </p>
+            <h4>Modelo Entidad/Relación</h4>
+            <p>Vamos a crear la base de datos del  ciclo de ASIR. En esta base de datos quedará reflejado: <br>
+                -Nombre y Apellidos de los profesores y profesoras. <br>
+                -Nombre de los módulos que imparten tanto en 1º como en 2º. <br>
+                -Horario de los módulos. <br>
+                -Descripción de las aulas. <br>
+                -Tareas de cada módulo. <br>
+                -Nombre y Apellidos de los Alumnos de 1º y de 2º. <br>
+            <figure>
+                <img src="img/1/Entidadrelacion.PNG" alt="Modelo Entidad/Relación" style="width: 100%;">
+                <figcaption>Fig 13. Modelo Entidad/Relación. </figcaption>
+            </figure>
+            <h4>Modelo relacional</h4>
+            <figure>
+                <img src="img/1/RELACIONAL.PNG" alt="Modelo relacional" style="width: 100%;">
+                <figcaption>Fig 14. Modelo Relacional. </figcaption>
+            </figure>
+            <h4>Implementación de las tablas</h4>
+            <p>Ahora debemos implementar el modelo relacional en MySQL, para facilitar este paso utilizaremos la herramienta PHPMyAdmin.</p>
+
             <h3 id="6">6. Alojar pagina web en Apache</h3>
             <h3 id="7">7. Estimación de costes</h3>
+            
         </div>
     </div>
 

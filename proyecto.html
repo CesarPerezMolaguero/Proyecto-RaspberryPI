@@ -97,10 +97,16 @@
             <h3 id="2">2. Instalación de Apache Server</h3>
 
             <p>El primer paso para instalar Apache será actualizar la Raspberry para tener la última versión de Apache.
-                Entraremos en root con <strong>sudo -i</strong>y utilizaremos el comando <strong>apt-get update</strong></p>
-            <p>Después para tener los paquetes actualizados utilizaremos el comando <strong>apt-get upgrade</strong></p>
-            <p>Ahora empezaremos la instalación de Apache mediante el comando <strong>apt-get install apache2</strong>
-                y despúes reiniciaremos el resvicio con <strong>service apache2 restart</strong></p>
+                Entraremos en root. <br>
+                <strong>sudo -i</strong> <br>
+                Actualizamos el sistema. <br>
+                <strong>apt-get update</strong> <br>
+                Actualizamos los paquetes. <br>
+                <strong>apt-get upgrade</strong> <br>
+                Ahora empezaremos la instalación de Apache. <br>
+                <strong>apt-get install apache2</strong> <br>
+                Reiniciamos el servicio de Apache. <br>
+                <strong>service apache2 restart</strong></p>
             <p>Para comprobar que funciona podremos en un navegador la dirección IP de la Raspberry y debería salir la
                 siguiente página:</p>
             <figure>
@@ -111,12 +117,15 @@
 
             <h3 id="3">3. Instalación MySQL</h3>
 
-            <p>Para la instalación de MySQL Server debemos seguir en root y ejecutar los comandos
-                <strong>apt-get install mysql-server</strong>, después para que lea el lenguaje Php debemos
-                ejecutar <strong>apt-get install php7.0</strong>. <br>
-                Y para que se pueda comunicar con MySQL ejecutamos <strong>apt-get install php7.0-mysql</strong>.
-                Después restauramos el servicio de
-                Apache para que se apliquen los cambios.</p>
+            <p>Para la instalación de MySQL Server debemos seguir en root. <br>
+                Primero instalamos MySQL. <br>
+                <strong>apt-get install mysql-server</strong> <br>
+                Después instalamos PHP. <br>
+                <strong>apt-get install php7.0</strong> <br>
+                Para que se pueda comunicar con MySQL instalamos php7.0-mysql <br>
+                <strong>apt-get install php7.0-mysql</strong> <br>
+                Después restauramos el servicio de Apache para que se apliquen los cambios. <br>
+                <strong>service apache2 restart</strong></p>
             <p>El siguiente paso será comprobar que todo funciona correctamente, para ello
                 crearemos una pequeña página en el directorio <strong>/var/www/html/</strong>
                 que muestre la configuración de PHP.
@@ -130,7 +139,7 @@
             <p>Ahora abrimos el navegador y ponemos <strong>192.168.41.202/index2.php</strong></p>
             <figure>
                 <img src="img/1/pag-conf-php.PNG" alt="Página que muestra la configuración PHP">
-                <figcaption>Fig 9. Página que muestra la configuración PHP. </figcaption>
+                <figcaption>Fig 9. Página que muestra la configuración de PHP. </figcaption>
             </figure>
 
             <h4>Seguridad de MySQL</h4>
@@ -163,14 +172,23 @@
             <h4>PHPMyAdmin</h4>
             <p>Para poder manejar MySQL desde una interfaz gráfica debemos instalar PHPMyAdmin</p>
             <p>Los pasos para ello son los siguientes: <br>
-            -Instalamos el paquete desde root. <strong>apt-get install phpmyadmin</strong> <br>
-            -Ahora debemos añadir "Include /etc/phpmyadmin/apache.conf" al final del archivo <strong>/etc/apache2/apache2.conf</strong><br>
-            -Reiniciamos Apache. <strong>service apache2 restart</strong> <br>
-            -Entramos a mysql como root. <strong>mysql -u root -p</strong> <br>
-            -Usar mysql. <strong>use mysql;</strong> <br>
-            -<strong>update user ser plugin '' where User='root';</strong> <br>
-            -<strong>flush privileges;</strong> <br>
-            Ahora ya tendríamos todo instalado, para entrar debemos ir al navegardor y escribir <strong>192.1168.41.202/phpmyadmin</strong>
+            -Instalamos el paquete desde root. <br>
+                <strong>apt-get install phpmyadmin</strong> <br>
+            -Ahora debemos añadir "Include /etc/phpmyadmin/apache.conf" al final del archivo. <br>
+                <strong>/etc/apache2/apache2.conf</strong><br>
+            -Reiniciamos Apache. <br>
+                <strong>service apache2 restart</strong> <br>
+            -Entramos a mysql como root. <br>
+                <strong>mysql -u root -p</strong> <br>
+            -Usar mysql. <br>
+                <strong>use mysql;</strong> <br>
+            -Damos todos los privilegios al usuario root. <br>
+                <strong>GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost';</strong> <br>
+            -Refrescamos los privilegios. <br>
+                <strong>flush privileges;</strong> <br>
+
+            Ahora ya tendríamos todo instalado, para entrar debemos ir al navegardor y escribir: <br>
+                <strong>192.168.41.202/phpmyadmin</strong> <br>
                 Nos saldrá la siguiente página a la que accederemos con el usuario root y la contraseña que le hallamos puesto en mysql_secure_installation.<br>
             </p>
             <figure>
@@ -179,14 +197,16 @@
             </figure>
 
             <h3 id="4">4. Base de datos</h3>
-            <h4>CREACIÓN DE UN USUARIOS</h4>
+            <h4>CREACIÓN DE USUARIOS</h4>
             <p>Primero vamos a crear un usuario que solo tenga acceso a la base de datos que vamos a crear que se llamará "colegio".
-                Para ello entraremos a mysql desde localhost con el usuario root (<strong>mysql -h localhost -u root -p</strong>).<br>
-                Después cearemos un usuario llamado "user" con contraseña "kebab123"
-                (<strong>CREATE USER 'user'@'localhost' IDENTIFIED BY 'kebab123';</strong>)<br>
-                Ahora le daremos privilegios solo para la base de datos del colegio.
-                (<strong>GRANT ALL PRIVILEGES ON colegio. * TO 'user'@'localhost';</strong>)<br>
-                Y refrescamos los privilegios. (<strong>flush privileges;</strong>)</p>
+                Para ello entraremos a mysql desde localhost con el usuario root <br>
+                <strong>mysql -h localhost -u root -p</strong><br>
+                Después crearemos un usuario llamado "user" con contraseña "kebab123" <br>
+                <strong>CREATE USER 'user'@'localhost' IDENTIFIED BY 'kebab123';</strong><br>
+                Ahora le daremos privilegios solo para la base de datos del colegio. <br>
+                <strong>GRANT ALL PRIVILEGES ON colegio. * TO 'user'@'localhost';</strong><br>
+                Y refrescamos los privilegios. <br>
+                <strong>flush privileges;</strong></p>
             <figure>
                 <img src="img/1/usuario-colegio-mysql.PNG" alt="Creación de usuario para la base de datos colegio">
                 <figcaption>Fig 14. Creación de usuario para la base de datos colegio. </figcaption>

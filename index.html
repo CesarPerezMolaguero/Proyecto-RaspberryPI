@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Proyecto</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<section id="fondo">
+    <div id="indicearriba">
+        <p>
+            <a href="#1">PREPARACIÓN DE RASPBERRY PI</a> |
+            <a href="#2">Instalación de Apache Server</a> |
+            <a href="#3">Instalación MySQL</a> <br>
+            <a href="#4">Base de datos</a>  |
+            <a href="#5">Alojar pagina web en Apache</a> |
+            <a href="#6">Estimación de costes</a> |
+            <a href="#7">FUENTES</a>
+        </p>
+    </div>
+    <nav id="menu">
+        <div id="menutexto">
+            <h2>ÍNDICE</h2>
+            <ol>
+                <li><a href="#1">PREPARACIÓN DE RASPBERRY PI</a></li>
+                <li><a href="#2">Instalación de Apache Server</a></li>
+                <li><a href="#3">Instalación MySQL</a></li>
+                <li><a href="#4">Base de datos</a></li>
+                <li><a href="#5">Alojar pagina web en Apache</a></li>
+                <li><a href="#6">Estimación de costes</a></li>
+                <li><a href="#7">Fuentes del proyecto</a></li>
+            </ol>
+            <p>Mediante una <strong>Raspberry Pi 2</strong>
+                crear un <strong>servidor Apache</strong> donde alojaremos nuestra página Web.
+                Además, instalaremos un <strong>servidor MySQL</strong> en el que alojaremos una
+                base de datos basada en el colegio.</p>
+        </div>
+        <a id="logoenlace" href="http://www.centrodonbosco.es/web/index.php/component/content/article/14-sample-data-articles/100-servicio-plataforma-educamos" target="_blank">
+            <span id="logo"></span></a>
+    </nav>
+    <div id="contenido" class="pequeño">
+        <h1>PROYECTO</h1>
+        <h2>César Pérez Molaguero  |  Victor Pérez Pedrosa | Pedro Garrido Requejo</h2>
+        <div id="texto">
+
+            <h3>OBJETIVO</h3>
+
+            <p>El objetivo del proyecto consiste en mediante una <strong>Raspberry Pi 2</strong>, que debemos conectar a ella
+                por SSH (por lo que no tendremos interfaze gráfica), crear un <strong>servidor Apache</strong>
+                en el que vamos a alojar nuestra página web que será la memoria del proyecto.
+                Además, instalaremos un <strong>servidor MySQL</strong> en el que alojaremos una
+                base de datos basada en el colegio. Esta base de datos contemplará los profesores, los alumnos, sus horarios y notas, y el lugar
+                donde se imparte cada clase.</p>
+
+            <h3 id="1">1.PREPARACIÓN DE RASPBERRY PI 2</h3>
+
+            <p>El primer paso es encontrar nuestra Raspberry en la red, para ello la Raspberry
+                y nuestro ordenador deben estar conectados en el mismo segmento de red.
+                Para facilitar este proyecto utilizaremos un router en el que la parte LAN estén el router y la Raspberry.
+                Este será el esquema de red que montaremos.</p>
+            <figure>
+                <img src="img/1/diagrama1.PNG" alt="Diagrama de red inicial">
+                <figcaption>Fig 1. Diagrama de red inicial</figcaption>
+            </figure>
+            <figure>
+                <img src="img/1/parte-LAN.PNG" alt="Parte LAN">
+                <figcaption>Fig 2. Parte LAN</figcaption>
+            </figure>
+            <p>Ahora para comprobar que tenemos conexión con la Raspberry, desde el PC haremos un ping a la Raspberry.</p>
+            <figure>
+                <img src="img/1/conexionconRasp.PNG" alt="Prueba conexión con Raspberry">
+                <figcaption>Fig 3. Prueba de conexión con Raspberry</figcaption>
+            </figure>
+            <p>Para conectar con la Raspberry de manera remota utilizaremos el comando <strong>ssh pi@192.168.0.191</strong>
+                y la contraseña por defecto es <strong>raspberry</strong>.</p>
+            <p>El siguiente paso sería cambiar la configuración de red de la Raspberry para estar en el segmento de red del colegio
+                y así tener salida a Internet. Para ello utilizaremos el editor de texto <strong>nano</strong> y modificaremos el archivo
+                <strong>/etc/network/interfaces</strong>, aplicaremos una configuración de red estática.</p>
+            <figure>
+                <img src="img/1/configuracionestaticaRasp.PNG" alt="Configuración estática Raspberry">
+                <figcaption>Fig 4. Configuración de red estática Raspberry</figcaption>
+            </figure>
+            <p>Ahora para que se applique la configuración debemos reiniciar la Raspberry con el comando <strong>sudo reboot.</strong><br>
+                Después debemos conectar el PC a la red del colegio para que la Raspberry y el PC estén en el mismo segmento de red.</p>
+            <figure>
+                <img src="img/1/diagrama2.PNG" alt="Diagrama de red 2">
+                <figcaption>Fig 5. Diagrama de red 2</figcaption>
+            </figure>
+            <p>Comprobamos la conexión con el ordenador (<strong>ping 192.168.41.240/24</strong>)
+                y además probamos si la Raspberry tiene salida a Internet (<strong>ping www.as.com</strong>).</p>
+            <figure>
+                <img src="img/1/ping-as.PNG" alt="Ping www.as.com">
+                <figcaption>Fig 6. Ping www.as.com</figcaption>
+            </figure>
+
+
+            <h3 id="2">2. Instalación de Apache Server</h3>
+
+            <p>El primer paso para instalar Apache será actualizar la Raspberry para tener la última versión de Apache.
+                Entraremos en root. <br>
+                <strong>sudo -i</strong> <br>
+                Actualizamos el sistema. <br>
+                <strong>apt-get update</strong> <br>
+                Actualizamos los paquetes. <br>
+                <strong>apt-get upgrade</strong> <br>
+                Ahora empezaremos la instalación de Apache. <br>
+                <strong>apt-get install apache2</strong> <br>
+                Reiniciamos el servicio de Apache. <br>
+                <strong>service apache2 restart</strong></p>
+            <p>Para comprobar que funciona podremos en un navegador la dirección IP de la Raspberry y debería salir la
+                siguiente página:</p>
+            <figure>
+                <img src="img/1/pagina-apache.PNG" alt="Página por defecto de Apache">
+                <figcaption>Fig 7. Página por defecto de Apache </figcaption>
+            </figure>
+
+
+            <h3 id="3">3. Instalación MySQL</h3>
+
+            <p>Para la instalación de MySQL Server debemos seguir en root. <br>
+                Primero instalamos MySQL. <br>
+                <strong>apt-get install mysql-server</strong> <br>
+                Después instalamos PHP. <br>
+                <strong>apt-get install php7.0</strong> <br>
+                Para que se pueda comunicar con MySQL instalamos php7.0-mysql <br>
+                <strong>apt-get install php7.0-mysql</strong> <br>
+                Después restauramos el servicio de Apache para que se apliquen los cambios. <br>
+                <strong>service apache2 restart</strong></p>
+            <p>El siguiente paso será comprobar que todo funciona correctamente, para ello
+                crearemos una pequeña página en el directorio <strong>/var/www/html/</strong>
+                que muestre la configuración de PHP.
+                Utilizaremos el comando <strong>nano /var/www/html/index2.php</strong> y entraremos
+                en el editor de texto Nano donde crearemos la página. Este será el código que pondremos.
+            </p>
+            <figure>
+                <img src="img/1/conf-php.PNG" alt="Página configuración PHP">
+                <figcaption>Fig 8. Página para probar que PHP funciona. </figcaption>
+            </figure>
+            <p>Ahora abrimos el navegador y ponemos <strong>192.168.41.202/index2.php</strong></p>
+            <figure>
+                <img src="img/1/pag-conf-php.PNG" alt="Página que muestra la configuración PHP">
+                <figcaption>Fig 9. Página que muestra la configuración de PHP. </figcaption>
+            </figure>
+
+            <h4>Seguridad de MySQL</h4>
+            <p>Para una mayor seguridad solo permitiremos las conexiones por <strong>localhost</strong>, que están controladas por el
+                <strong>puerto 3306</strong>. Este deberá aparecer cerrado para conexciones de fuera, y abierto para localhost.</p>
+            <p>Utizaremos el <strong>mysql_secure_installation</strong>, habrá una paso en el que te pregunta "¿Quieres permitir conexiones remotas?"
+                debemos darele a no. Además de hacer lo mencionado anteriormente aquí podremos cambiar la contraseña del root, borrar usuarios
+                y bases de datos por defecto...</p>
+            <p>Una vez instalado las pruebas que debemos realizar son:</p>
+            <p>-Escaneo de puertos mediante nmap con una conexión remota. Como vemos en la imagen el puerto 3306 está cerrado.<br>
+                Comando: <strong>nmap 192.168.41.202 -p 3306</strong></p>
+            <figure>
+                <img src="img/1/nmap-fuera.PNG" alt="Escaneo del puerto 3306 en remoto">
+                <figcaption>Fig 10. Escaneo del puerto 3306 en remoto. </figcaption>
+            </figure>
+            <p>-Entramos a la Raspberry para estar en localhost, y hacemos un nmap de las conexiones localhost.
+                Como vemos en la imagen el puerto 3306 está abierto. <br>
+                Comando: <strong>nmap localhost</strong></p>
+            <figure>
+                <img src="img/1/nmap-localhost.PNG" alt="Escaneo nmap localhost">
+                <figcaption>Fig 11. Escaneo nmap localhost. </figcaption>
+            </figure>
+            <p>-Entrar a MySQL desde localhost. Debemos poder entrar. <br>
+                Comando: <strong>mysql -h localhost -u root -p</strong></p>
+            <figure>
+                <img src="img/1/mysql-localhost.PNG" alt="Entrar a MySQL desde localhost">
+                <figcaption>Fig 12. Entrar a MySQL desde localhost. </figcaption>
+            </figure>
+
+            <h4>PHPMyAdmin</h4>
+            <p>Para poder manejar MySQL desde una interfaz gráfica debemos instalar PHPMyAdmin</p>
+            <p>Los pasos para ello son los siguientes: <br>
+            -Instalamos el paquete desde root. <br>
+                <strong>apt-get install phpmyadmin</strong> <br>
+            -Ahora debemos añadir "Include /etc/phpmyadmin/apache.conf" al final del archivo. <br>
+                <strong>/etc/apache2/apache2.conf</strong><br>
+            -Reiniciamos Apache. <br>
+                <strong>service apache2 restart</strong> <br>
+            -Entramos a mysql como root. <br>
+                <strong>mysql -u root -p</strong> <br>
+            -Usar mysql. <br>
+                <strong>use mysql;</strong> <br>
+            -Damos todos los privilegios al usuario root. <br>
+                <strong>GRANT ALL PRIVILEGES ON *.* TO 'root'@'localhost';</strong> <br>
+            -Refrescamos los privilegios. <br>
+                <strong>flush privileges;</strong> <br>
+
+            Ahora ya tendríamos todo instalado, para entrar debemos ir al navegardor y escribir: <br>
+                <strong>192.168.41.202/phpmyadmin</strong> <br>
+                Nos saldrá la siguiente página a la que accederemos con el usuario root y la contraseña que le hallamos puesto en mysql_secure_installation.<br>
+            </p>
+            <figure>
+                <img src="img/1/phpmyadmin.PNG" alt="Interfaz de PHPMyAdmin">
+                <figcaption>Fig 13. Interfaz de PHPMyAdmin. </figcaption>
+            </figure>
+
+            <h3 id="4">4. Base de datos</h3>
+            <h4>CREACIÓN DE USUARIOS</h4>
+            <p>Primero vamos a crear un usuario que solo tenga acceso a la base de datos que vamos a crear que se llamará "colegio".
+                Para ello entraremos a mysql desde localhost con el usuario root <br>
+                <strong>mysql -h localhost -u root -p</strong><br>
+                Después crearemos un usuario llamado "user" con contraseña "kebab123" <br>
+                <strong>CREATE USER 'user'@'localhost' IDENTIFIED BY 'kebab123';</strong><br>
+                Ahora le daremos privilegios solo para la base de datos del colegio. <br>
+                <strong>GRANT ALL PRIVILEGES ON colegio. * TO 'user'@'localhost';</strong><br>
+                Y refrescamos los privilegios. <br>
+                <strong>flush privileges;</strong></p>
+            <figure>
+                <img src="img/1/usuario-colegio-mysql.PNG" alt="Creación de usuario para la base de datos colegio">
+                <figcaption>Fig 14. Creación de usuario para la base de datos colegio. </figcaption>
+            </figure>
+
+
+
+            <h4>Modelo Entidad/Relación</h4>
+            <p>Vamos a crear la base de datos del  ciclo de ASIR. En esta base de datos quedará reflejado: <br>
+                -Nombre y Apellidos de los profesores y profesoras. <br>
+                -Nombre de los módulos que imparten tanto en 1º como en 2º. <br>
+                -Horario de los módulos. <br>
+                -Descripción de las aulas. <br>
+                -Tareas de cada módulo. <br>
+                -Nombre y Apellidos de los Alumnos de 1º y de 2º. <br> </p>
+            <figure>
+                <img src="img/1/modelo%20er.PNG" alt="Modelo Entidad/Relación" >
+                <figcaption>Fig 15. Modelo Entidad/Relación. </figcaption>
+            </figure>
+            <h4>Modelo relacional</h4>
+            <figure>
+                <img src="img/1/RELACIONAL2.PNG" alt="Modelo relacional" >
+                <figcaption>Fig 16. Modelo Relacional. </figcaption>
+            </figure>
+            <h4>Implementación de las tablas</h4>
+            <p>Ahora debemos implementar el modelo relacional en MySQL, para facilitar este paso utilizaremos
+                la herramienta PHPMyAdmin. Iremos creando las tablas mediante la consola (se podría hacer mediante la interfaz
+                gráfica) e insertaremos los datos utilizando la interfaz gráfica que nos ofrece la herramienta.</p>
+            <figure>
+                <img src="img/1/BDcomandos1.PNG" alt="Creación de tablas consola PHPMyAdmin" >
+                <figcaption>Fig 17. Creación de tablas mediante la consola de PHPMyAdmin. </figcaption>
+            </figure>
+            <figure>
+                <img src="img/1/tablas.PNG" alt="Insertar datos utilizando la interfaz gráfica de PHPMyAdmin" >
+                <figcaption>Fig 18. Insertar datos utilizando la interfaz gráfica de PHPMyAdmin. </figcaption>
+            </figure>
+
+
+            <h3 id="5">5. Alojar pagina web en Apache</h3>
+
+
+            <p>Primero debemos tener subida la página Web a nuestro repositorio de <a href="https://github.com/CesarPerezMolaguero/Proyecto-RaspberryPI">GitHub</a>.
+                Después debemos instalar Git en nuestra Raspberry. <br>
+            <strong>sudo apt install git</strong> <br>
+            Después debemos colorcarnos en el directorio /var/www/html <br>
+            <strong>cd /var/www/html</strong><br>
+            Ahora clonaremos el repositorio de GitHub a este directorio. <br>
+            <strong>git clone https://github.com/CesarPerezMolaguero/Proyecto-RaspberryPI.git</strong><br>
+            Ya solo queda probarlo, para ello iremos al navegador y pondremos: <br>
+                <strong>192.168.41.202/Proyecto-RaspberryPI/index.html</strong></p>
+            <figure>
+                <img src="img/1/resultado-pag.PNG" alt="Resultado página" >
+                <figcaption>Fig 19. Resultado de la página. </figcaption>
+            </figure>
+
+            <h3 id="6">6. Estimación de costes</h3>
+
+
+            <p>Nuestro grupo a elegido la empresa <a href="https://iniciatec.es/">INICIATEC</a> para  pedirle los presupuestos de los dominios y del hosting y valorando los tres
+                presupuestos en cuanto a calidad precio el mejor presupuesto sería el de “TIENDA ONLINE” puesto que su espacio en disco ya es
+                aceptable y sus demás características se ajustan a  nuestra idea de presupuesto.</p>
+            <figure>
+                <img src="img/1/presupuesto.PNG" alt="Presupuesto" style="width: 75%;">
+                <figcaption>Fig 20. Presupuesto. </figcaption>
+            </figure>
+            <h4>PLAN BÁSICO</h4>
+            <p>VENTAJAS</p>
+            <p>-Sus bases de datos son ilimitadas, sus dominios son ilimitados y el protocolo de transferencia de datos es ilimitado.</p>
+            <p>DESVENTAJAS</p>
+            <p>-Su espacio en disco es pequeño, la transferencia mensual en comparación con las otras es bastante bajo y
+                las cuentas de mail  no son ilimitadas.</p>
+
+            <h4>TIENDA ONLINE</h4>
+            <p>VENTAJAS</p>
+            <p>-Sus cuentas de mail son ilimitadas, sus bases de datos son ilimitadas, sus dominios son ilimitados y el protocolo de transferencia de datos es ilimitado.</p>
+            <p>DESVENTAJAS</p>
+            <p>-Su espacio en disco es bajo, su transferencia mensual es baja en comparación a los demás presupuestos es bajo.</p>
+
+            <h4>PROFESIONAL</h4>
+            <p>VENTAJAS</p>
+            <p>-Su espacio en disco es de 20 GB, su transferencia mensual es ilimitada, sus cuentas de mail son ilimitadas, bases de datos ilimitadas y dominios ilimitados.</p>
+            <p>DESVENTAJAS</p>
+            <p>-El coste del servicio.</p>
+
+            <h4>UTILIZAR UN SERVIDOR REAL</h4>
+            <p>VENTAJAS</p>
+            <p>-Mayores recursos:  Permite utilizar todos los recursos exclusivamente para el proyecto que la empresa necesita.<br>
+                -Escalabilidad: al trabajar con un servidor web se facilita la incorporación de nuevas herramientas en la medida en que los proyectos lo requieran.
+                <br>
+                -Personalización: contar con un servidor web dedicado permite un mayor control de las configuraciones y la personalización del mismo.
+
+            </p>
+            <p>DESVENTAJAS</p>
+            <p>-Valor: el costo que tiene este tipo de servidores es mucho más alto que los servidores compartidos debido a las ventajas
+                y  posibilidades que brindan. <br>
+                Conocimientos para configurar el servidor: al igual que sucede con un servidor dedicado físico, el servidor web requiere de
+                conocimientos para poder configurarlo y utilizarlo.</p>
+
+            <h4>UTILIZAR SERVIDOR VIRTUAL</h4>
+            <p>VENTAJAS</p>
+            <p>-La libertad de un servidor dedicado, administrar varios sitios criminal cuenta única, mejor seguridad, flexibilidad, combinan las
+                características de alojamiento compartido y dedicado y se adapta tanto a medias como a  grandes empresas.</p>
+            <p>DESVENTAJAS</p>
+            <p>-Limitación de uso de CPU y RAM, ancho de banda es limitado, el tiempo de procesamiento es mayor y el cliente tiene que controlar su
+                servidor sino es administrado.</p>
+
+            <h4>UTILIZAR HOSTING</h4>
+            <p>VENTAJAS</p>
+            <p>-Económico, fácil de usar, mantención, seguridad y soporte técnico a cargo de su proveedor de hosting.</p>
+            <p>DESVENTAJAS</p>
+            <p>-Compartir recursos implica que si un sitio se vuelve realmente “pesado” podría disminuir la velocidad de los otros sitios que comparten el mismo servidor.
+                MuchA menos flexibilidad y opciones, comparado con un VPS o un Dedicado.</p>
+
+            <h4>UTILIZAR HOUSTING</h4>
+            <p>VENTAJAS</p>
+            <p>-Más espacio, posibilidad de revender servicios de hosting a terceros, recursos ilimitados y escalabilidad (siempre es posible contratar otros
+                servicios a mayores según necesidades.)</p>
+            <p>DESVENTAJAS</p>
+            <p>-No es un servicio barato, las licencias y el software corren a cargo del cliente, la configuración y la administración del servidor son
+                responsabilidad del cliente y si hay averías es necesario desplazarse al data center.</p>
+
+
+            <h3 id="7">FUENTES DEL PROYECTO</h3>
+
+            <p>
+            <a href="https://www.raspberrypi.org/forums/viewtopic.php?t=101424" target="_blank">Conectarse a la Raspberry por SSH.</a>
+            <br>
+            <a href="https://www.lnxd.es/entradas/como-instalar-facilmente-apache-mariadb-y-php7-en-debian-9-stretch-lamp/" target="_blank">
+                    Instalar Apache, PHP, y seguridad MySQL.</a>
+            <br>
+            <a href="https://www.comoinstalarlinux.com/como-instalar-mysql-en-debian/" target="_blank">Instalar MySQL.</a>
+            <br>
+            <a href="https://www.linuxito.com/gnu-linux/nivel-medio/883-como-instalar-phpmyadmin-en-debian" target="_blank">Instalar PHPMyAdmin</a>
+            <br>
+            <a href="https://www.digitalocean.com/community/tutorials/crear-un-nuevo-usuario-y-otorgarle-permisos-en-mysql-es" target="_blank">
+                    Crear usuarios MySQL.
+                </a>
+            <br>
+                <a href="https://www.lucidchart.com/es/users/login" target="_blank">
+                    Craer modelo relacional</a>
+            <br>
+                <a href="https://jorgesanchez.net/ermaker/" target="_blank">Crear modelo E/R</a>
+            <br>
+                <a href="https://github.com/CesarPerezMolaguero/Proyecto-RaspberryPI" target="_blank">Repositorio de GitHub</a>
+            <br>
+                <a href="https://iniciatec.es/" target="_blank">Presupuesto</a>
+            <br>
+            </p>
+            </div>
+        </div>
+    </div>
+    <button id="ocultarindice">-</button>
+</section>
+
+
+<script src="jquery-3.3.1.min.js" ></script>
+<script>
+var x = "#contenido";
+    $("#ocultarindice").on("click", function () {
+        if($(x).hasClass("pequeño")){
+            $(x).removeClass("pequeño");
+            $(x).addClass("grande");
+            $("nav").css("opacity","0");
+        }
+        else if($(x).hasClass("grande")){
+            $(x).removeClass("grande");
+            $(x).addClass("pequeño");
+            $("nav").css("opacity","1");
+        }
+    })
+    $("#ocultarindice").on("click", function () {
+        if($(this).text()=="-"){
+            $(this).text("+");
+        }
+        else if($(this).text()=="+"){
+            $(this).text("-");
+        }
+    })
+
+</script>
+
+</body>
+</html>

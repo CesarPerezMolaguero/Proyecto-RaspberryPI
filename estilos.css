@@ -60,6 +60,9 @@ nav div a{
     background-size: contain;
     background-repeat: no-repeat;
 }
+li a:hover{
+    border-bottom: 1px solid black;
+}
 /*******************menu de navegación cuando la pantalla es pequeña*********************/
 #indicearriba{
     display: none;

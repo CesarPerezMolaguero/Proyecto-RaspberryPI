@@ -30,8 +30,8 @@
                 <li><a href="#6">Estimación de costes</a></li>
                 <li><a href="#7">Fuentes del proyecto</a></li>
             </ol>
-            <p>El proyecto consiste en mediante un <strong>Raspberry Pi 2</strong>
-                crear un <strong>servidor Apache</strong> en el que vamos a alojar nuestra página web.
+            <p>Mediante una <strong>Raspberry Pi 2</strong>
+                crear un <strong>servidor Apache</strong> donde alojaremos nuestra página Web.
                 Además, instalaremos un <strong>servidor MySQL</strong> en el que alojaremos una
                 base de datos basada en el colegio.</p>
         </div>
@@ -213,7 +213,7 @@
             </figure>
 
 
-            </p>
+
             <h4>Modelo Entidad/Relación</h4>
             <p>Vamos a crear la base de datos del  ciclo de ASIR. En esta base de datos quedará reflejado: <br>
                 -Nombre y Apellidos de los profesores y profesoras. <br>
@@ -221,18 +221,28 @@
                 -Horario de los módulos. <br>
                 -Descripción de las aulas. <br>
                 -Tareas de cada módulo. <br>
-                -Nombre y Apellidos de los Alumnos de 1º y de 2º. <br>
+                -Nombre y Apellidos de los Alumnos de 1º y de 2º. <br> </p>
             <figure>
                 <img src="img/1/modelo%20er.PNG" alt="Modelo Entidad/Relación" >
                 <figcaption>Fig 15. Modelo Entidad/Relación. </figcaption>
             </figure>
             <h4>Modelo relacional</h4>
             <figure>
-                <img src="img/1/RELACIONAL.PNG" alt="Modelo relacional" >
+                <img src="img/1/RELACIONAL2.PNG" alt="Modelo relacional" >
                 <figcaption>Fig 16. Modelo Relacional. </figcaption>
             </figure>
             <h4>Implementación de las tablas</h4>
-            <p>Ahora debemos implementar el modelo relacional en MySQL, para facilitar este paso utilizaremos la herramienta PHPMyAdmin.</p>
+            <p>Ahora debemos implementar el modelo relacional en MySQL, para facilitar este paso utilizaremos
+                la herramienta PHPMyAdmin. Iremos creando las tablas mediante la consola (se podría hacer mediante la interfaz
+                gráfica) e insertaremos los datos utilizando la interfaz gráfica que nos ofrece la herramienta.</p>
+            <figure>
+                <img src="img/1/BDcomandos1.PNG" alt="Creación de tablas consola PHPMyAdmin" >
+                <figcaption>Fig 17. Creación de tablas mediante la consola de PHPMyAdmin. </figcaption>
+            </figure>
+            <figure>
+                <img src="img/1/tablas.PNG" alt="Insertar datos utilizando la interfaz gráfica de PHPMyAdmin" >
+                <figcaption>Fig 18. Insertar datos utilizando la interfaz gráfica de PHPMyAdmin. </figcaption>
+            </figure>
 
 
             <h3 id="5">5. Alojar pagina web en Apache</h3>
@@ -249,7 +259,7 @@
                 <strong>192.168.41.202/Proyecto-RaspberryPI.git/proyecto.html</strong></p>
             <figure>
                 <img src="img/1/resultado-pag.PNG" alt="Resultado página" >
-                <figcaption>Fig 17. Resultado de la página. </figcaption>
+                <figcaption>Fig 19. Resultado de la página. </figcaption>
             </figure>
 
             <h3 id="6">6. Estimación de costes</h3>
@@ -260,7 +270,7 @@
                 aceptable y sus demás características se ajustan a  nuestra idea de presupuesto.</p>
             <figure>
                 <img src="img/1/presupuesto.PNG" alt="Presupuesto" style="width: 75%;">
-                <figcaption>Fig 18. Presupuesto. </figcaption>
+                <figcaption>Fig 20. Presupuesto. </figcaption>
             </figure>
             <h4>PLAN BÁSICO</h4>
             <p>VENTAJAS</p>
@@ -319,7 +329,7 @@
                 responsabilidad del cliente y si hay averías es necesario desplazarse al data center.</p>
 
 
-            <h3 id="7">FUENTES</h3>
+            <h3 id="7">FUENTES DEL PROYECTO</h3>
 
             <p>
             <a href="https://www.raspberrypi.org/forums/viewtopic.php?t=101424" target="_blank">Conectarse a la Raspberry por SSH.</a>

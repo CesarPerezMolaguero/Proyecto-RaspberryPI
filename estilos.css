@@ -220,7 +220,7 @@ img{
     }
 
 }
-@media all and (max-height: 605px){
+@media all and (max-height: 600px){
 
     nav a #logo{
         display: none;

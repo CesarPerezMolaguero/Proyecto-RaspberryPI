@@ -231,3 +231,9 @@ img{
         display: none;
     }
 }
+@media all and (min-height: 800px){
+
+    nav div ol{
+        margin-bottom: 100px;
+    }
+}

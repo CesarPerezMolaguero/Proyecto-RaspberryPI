@@ -214,7 +214,7 @@ img{
 
 }
 
-@media all and (max-width: 600px) {
+@media all and (max-width: 550px) {
     #indicearriba {
         display: none;
     }
